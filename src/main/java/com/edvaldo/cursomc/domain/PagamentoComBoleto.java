@@ -1,6 +1,7 @@
 package com.edvaldo.cursomc.domain;
 
 import com.edvaldo.cursomc.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,9 @@ public class PagamentoComBoleto extends Pagamento implements Serializable {
 
     private static final long serialVersionUID = 2701691354715642876L;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataVencimento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataPagamento;
 
     public PagamentoComBoleto() {
