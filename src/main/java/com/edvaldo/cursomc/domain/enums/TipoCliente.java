@@ -1,8 +1,5 @@
 package com.edvaldo.cursomc.domain.enums;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import static java.util.Objects.isNull;
 
 public enum TipoCliente {
@@ -32,9 +29,11 @@ public enum TipoCliente {
             return null;
         }
 
-        Stream<TipoCliente> values = Stream.of(TipoCliente.values());
-        Optional<TipoCliente> tipoCliente = values.filter(c -> cod.equals(c.getCod())).findFirst();
-
-        return tipoCliente.orElseThrow(() -> new IllegalArgumentException("Id inválido: " + cod));
+        for (TipoCliente tipoCliente : TipoCliente.values()) {
+            if (cod.equals(tipoCliente.getCod())) {
+                return tipoCliente;
+            }
+        }
+        throw new IllegalArgumentException("Id inválido: " + cod);
     }
 }

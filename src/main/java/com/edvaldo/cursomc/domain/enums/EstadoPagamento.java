@@ -1,8 +1,5 @@
 package com.edvaldo.cursomc.domain.enums;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-
 import static java.util.Objects.isNull;
 
 public enum EstadoPagamento {
@@ -33,9 +30,12 @@ public enum EstadoPagamento {
             return null;
         }
 
-        Stream<EstadoPagamento> values = Stream.of(EstadoPagamento.values());
-        Optional<EstadoPagamento> estadoPagamento = values.filter(c -> cod.equals(c.getCod())).findFirst();
+        for (EstadoPagamento estadoPagamento : EstadoPagamento.values()) {
+            if (cod.equals(estadoPagamento.getCod())) {
+                return estadoPagamento;
+            }
+        }
 
-        return estadoPagamento.orElseThrow(() -> new IllegalArgumentException("Id inválido: " + cod));
+        throw new IllegalArgumentException("Id inválido: " + cod);
     }
 }
